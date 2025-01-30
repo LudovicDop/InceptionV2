@@ -10,7 +10,7 @@ COPY conf/nginx.crt /etc/nginx/certs/nginx.crt
 COPY conf/nginx.key /etc/nginx/certs/nginx.key
 COPY conf/nginx.conf /etc/nginx/nginx.conf
 
-EXPOSE 80 443
+EXPOSE 443 443
 
 CMD ["nginx", "-g", "daemon off;"]
 
