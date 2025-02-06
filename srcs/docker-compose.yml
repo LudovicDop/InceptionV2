@@ -1,0 +1,6 @@
+services:
+  nginx:
+    image: nginx-test:0.1
+    ports:
+      - "443:443"
+    restart: always
