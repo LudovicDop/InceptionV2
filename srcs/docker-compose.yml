@@ -1,8 +1,9 @@
 services:
   wordpress:
     image: wordpress-test
+    container_name: wordpress
     ports:
-      - "9000:80"  # Assuming the WordPress container listens on port 80
+      - "9000:9000"  # Assuming the WordPress container listens on port 80
     depends_on:
       - mariadb
     environment:
@@ -12,11 +13,13 @@ services:
       WORDPRESS_DB_NAME: wordpress
     volumes:
       - wordpress_data:/var/www/html
+      - /run/php:/run/php
     networks:
       - ohyeah
 
   mariadb:
     image: mariadb-test
+    container_name: mariadb
     ports:
       - "3306:3306"
     environment:
@@ -31,12 +34,14 @@ services:
 
   nginx:
     image: nginx-test
+    container_name: nginx
     ports:
       - "443:443"
     depends_on:
       - wordpress
     volumes:
       - wordpress_data:/var/www/html
+      - /run/php:/run/php
     networks:
       - ohyeah
 

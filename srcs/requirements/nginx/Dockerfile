@@ -23,7 +23,8 @@ RUN openssl req -x509 -nodes \
 -subj "/C=FR/ST=Haut-Rhin/L=Mulhouse/O=42Mulhouse/OU=42Mulhouse/CN=localhost/UID=ldoppler" 
 
 RUN chmod 600 /etc/nginx/certs/nginx.*
-RUN mv /var/www/html/index.nginx-debian.html /var/www/html/index.html
+# RUN mv /var/www/html/index.nginx-debian.html /var/www/html/index.html
+RUN rm /var/www/html/index.nginx-debian.html
 
 EXPOSE 443
 
