@@ -1,32 +1,8 @@
-# version: '3.8'
-# services:
-#   wordpress:
-#     image: wordpress-test
-#     ports: 
-#       - "9000"
-#     depends_on:
-#       - mysql
-#     environment:
-#       WORDPRESS_DB_HOST: mysql
-#       WORDPRESS_DB_USER: root
-#       WORDPRESS_DB_PASSWORD: "coffee"
-#       WORDPRESS_DB_NAME: wordpress
-#   mariadb:
-#     image: "mariadb-test"
-#     environment:
-#       MYSQL_DATABASE: wordpress
-#       MYSQL_ROOT_PASSWORD: "coffee"
-#     volumes:
-#       - ./mysql:/var/lib/mysql
-# networks:
-#   ohyeah:
-#     ipam:
-#       driver: default
 services:
   wordpress:
     image: wordpress-test
     ports:
-      - "443:443"
+      - "9000"
     depends_on:
       - mariadb
     environment:
@@ -35,12 +11,13 @@ services:
       WORDPRESS_DB_PASSWORD: "needcoffee"
       WORDPRESS_DB_NAME: wordpress
     networks:
-      ohyeah:
-        ipv4_address: "10.56.1.21"
+      - ohyeah
   mariadb:
     image: mariadb-test
     ports:
       - "3306"
+    depends_on:
+      - nginx
     environment:
       MARIADB_ROOT_PASSWORD: "needcoffee"
       MARIADB_DATABASE: mariadb
@@ -49,9 +26,16 @@ services:
     volumes:
       - ./mariadb:/var/lib/mysql
     networks:
-      ohyeah:
-        ipv4_address: "10.56.1.20"
+      - ohyeah
+  nginx:
+    image: nginx-test
+    ports:
+      - "443:443"
+    networks:
+      - ohyeah
 networks:
   ohyeah:
+    driver: bridge
     ipam:
-      driver: default
+      config:
+        - subnet: 172.19.0.0/16
