@@ -2,7 +2,7 @@ services:
   wordpress:
     image: wordpress-test
     ports:
-      - "9000"
+      - "9000:80"  # Assuming the WordPress container listens on port 80
     depends_on:
       - mariadb
     environment:
@@ -10,29 +10,38 @@ services:
       WORDPRESS_DB_USER: root
       WORDPRESS_DB_PASSWORD: "needcoffee"
       WORDPRESS_DB_NAME: wordpress
+    volumes:
+      - wordpress_data:/var/www/html
     networks:
       - ohyeah
+
   mariadb:
     image: mariadb-test
     ports:
-      - "3306"
-    depends_on:
-      - nginx
+      - "3306:3306"
     environment:
       MARIADB_ROOT_PASSWORD: "needcoffee"
-      MARIADB_DATABASE: mariadb
+      MARIADB_DATABASE: wordpress
       MARIADB_USER: ldoppler
       MARIADB_PASSWORD: "needcoffeetoo"
     volumes:
       - ./mariadb:/var/lib/mysql
     networks:
       - ohyeah
+
   nginx:
     image: nginx-test
     ports:
       - "443:443"
+    depends_on:
+      - wordpress
+    volumes:
+      - wordpress_data:/var/www/html
     networks:
       - ohyeah
+
+volumes:
+  wordpress_data:
 networks:
   ohyeah:
     driver: bridge
