@@ -29,6 +29,7 @@ services:
       MARIADB_PASSWORD: "needcoffeetoo"
     volumes:
       - ./mariadb:/var/lib/mysql
+      - ./requirements/mariadb/conf/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - ohyeah
 

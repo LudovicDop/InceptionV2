@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS mariadb_database;
-CREATE USER IF NOT EXISTS 'ldoppler'@'%' IDENTIFIED BY 'azerty';
-GRANT ALL PRIVILEGES ON mariadb_database.* TO 'ldoppler'@'%';
+CREATE DATABASE IF NOT EXISTS wordpress;
+CREATE USER IF NOT EXISTS 'ldoppler'@'%' IDENTIFIED BY 'needcoffee';
+GRANT ALL PRIVILEGES ON wordpress.* TO 'ldoppler'@'%';
 FLUSH PRIVILEGES;
 
