@@ -14,6 +14,7 @@ services:
     volumes:
       - wordpress_data:/var/www/html
       - /run/php:/run/php
+      - /run/mysql:/run/mysql
     networks:
       - ohyeah
 
@@ -30,6 +31,7 @@ services:
     volumes:
       - mariadb_data:/var/lib/mysql
       - ./requirements/mariadb/conf/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - /run/mysql:/run/mysql
     networks:
       - ohyeah
 
