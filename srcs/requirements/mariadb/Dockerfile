@@ -13,6 +13,7 @@ EXPOSE 3306
 VOLUME /var/lib/mysql
 
 COPY ./conf/init.sql /docker-entrypoint-initdb.d/
+COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 
 # Copy custom MySQL configuration if needed (optional)
 # COPY my.cnf /etc/mysql/my.cnf
