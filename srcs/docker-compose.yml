@@ -20,7 +20,7 @@ services:
       - /run/php:/run/php
     networks:
       - ohyeah
-    entrypoint: ["/bin/sh", "/usr/local/bin/wp-setup.sh"]
+    # entrypoint: ["/bin/sh", "/usr/local/bin/wp-setup.sh"]
 
   mariadb:
     image: mariadb-test
