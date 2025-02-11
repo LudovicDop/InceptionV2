@@ -6,34 +6,34 @@ services:
       - "9000:9000"  # Assuming the WordPress container listens on port 80
     depends_on:
       - mariadb
-    environment:
-      WORDPRESS_DB_HOST: mariadb:3306
-      WORDPRESS_DB_NAME: wordpress
-      WORDPRESS_DB_USER: ldoppler
-      WORDPRESS_DB_PASSWORD: "needcoffee"
-      WORDPRESS_TABLE_PREFIX: wp_
+    # environment:
+    #   WORDPRESS_DB_HOST: mariadb:3306
+    #   WORDPRESS_DB_NAME: wordpress
+    #   WORDPRESS_DB_USER: ldoppler
+    #   WORDPRESS_DB_PASSWORD: "needcoffee"
+    #   WORDPRESS_TABLE_PREFIX: wp_
+    env_file:
+      - .env
+      
     volumes:
       - wordpress_data:/var/www/html
       - /run/php:/run/php
-      - /run/mysql:/run/mysql
-    # entrypoint: >
-    #   sh -c "
-    #   sleep 10 && 
-    #   wp core install --url='http://localhost:4430' --title='My Auto WordPress' --admin_user='admin' --admin_password='adminpass' --admin_email='admin@example.com' --allow-root &&
-    #   apache2-foreground"
     networks:
       - ohyeah
+    entrypoint: ["/bin/sh", "/usr/local/bin/wp-setup.sh"]
 
   mariadb:
     image: mariadb-test
     container_name: mariadb
     ports:
       - "3306:3306"
-    environment:
-      MARIADB_ROOT_PASSWORD: "needcoffee"
-      MARIADB_DATABASE: wordpress
-      MARIADB_USER: ldoppler
-      MARIADB_PASSWORD: "needcoffee"
+    # environment:
+    #   MARIADB_ROOT_PASSWORD: "needcoffee"
+    #   MARIADB_DATABASE: wordpress
+    #   MARIADB_USER: ldoppler
+    #   MARIADB_PASSWORD: "needcoffee"
+    env_file:
+      - .env
     volumes:
       - mariadb_data:/var/lib/mysql
       - ./requirements/mariadb/conf/init.sql:/docker-entrypoint-initdb.d/init.sql
