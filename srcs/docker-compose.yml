@@ -7,14 +7,20 @@ services:
     depends_on:
       - mariadb
     environment:
-      WORDPRESS_DB_HOST: mariadb
+      WORDPRESS_DB_HOST: mariadb:3306
+      WORDPRESS_DB_NAME: wordpress
       WORDPRESS_DB_USER: ldoppler
       WORDPRESS_DB_PASSWORD: "needcoffee"
-      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_TABLE_PREFIX: wp_
     volumes:
       - wordpress_data:/var/www/html
       - /run/php:/run/php
       - /run/mysql:/run/mysql
+    # entrypoint: >
+    #   sh -c "
+    #   sleep 10 && 
+    #   wp core install --url='http://localhost:4430' --title='My Auto WordPress' --admin_user='admin' --admin_password='adminpass' --admin_email='admin@example.com' --allow-root &&
+    #   apache2-foreground"
     networks:
       - ohyeah
 
@@ -39,7 +45,7 @@ services:
     image: nginx-test
     container_name: nginx
     ports:
-      - "443:443"
+      - "4430:4430"
     depends_on:
       - wordpress
     volumes:
