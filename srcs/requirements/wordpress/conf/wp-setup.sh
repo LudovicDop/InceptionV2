@@ -25,7 +25,7 @@ cd && wp config create --allow-root \
                     --path="/var/www/html" \
                     --allow-root
 
-wp theme install twentytwentyone --activate --allow-root
+wp theme install twentytwentyfour --activate --allow-root
 
 
 echo "WordPress configuration created successfully!"
