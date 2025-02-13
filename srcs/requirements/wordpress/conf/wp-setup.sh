@@ -15,6 +15,19 @@ cd && wp config create --allow-root \
                  --dbhost=mariadb:3306 \
                  --path='/var/www/html' --force
 
+
+ wp core install    --url="https://localhost:4430"    \
+                    --title="Inception - Home"         \
+                    --admin_user="ldoppler"           \
+                    --admin_password="espresso"       \
+                    --admin_email="ludovicdop@gmail.com" \
+                    --skip-email \
+                    --path="/var/www/html" \
+                    --allow-root
+
+wp theme install twentytwentyone --activate --allow-root
+
+
 echo "WordPress configuration created successfully!"
 
-sleep infinite
+php-fpm7.4 -F
