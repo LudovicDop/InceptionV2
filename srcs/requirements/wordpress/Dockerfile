@@ -24,6 +24,7 @@ COPY ./conf/wp-setup.sh /usr/local/bin/wp-setup.sh
 
 # # Ensure wp-setup.sh is executable
 RUN chmod +x /usr/local/bin/wp-setup.sh
+# RUN (./usr/local/bin/wp-seup.sh && echo success) || echo fail
 
 
 
