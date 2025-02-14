@@ -22,7 +22,7 @@
 # done
 echo "\033[0;32mMariaDB is ready.\033[m\n\033[0;31mProceeding with WordPress setup...\033[m"
 
-
+sleep 10
 # Create wp-config.php
 cd /var/www/html && wp config create --allow-root \
     --dbname=wordpress \
