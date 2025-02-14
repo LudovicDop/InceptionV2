@@ -44,7 +44,7 @@ cd /var/www/html && wp core install \
     --allow-root
 
 # Install and activate the Twenty Twenty-Four theme
-# wp theme install twentytwentyfour --activate --allow-root
+wp theme install twentytwentyfour --activate --path="/var/www/html/" --allow-root
 
 echo "\033[0;32mWordPress configuration created successfully!\033[m"
 # Start PHP-FPM
