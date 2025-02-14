@@ -27,7 +27,7 @@ RUN chmod 600 /etc/nginx/certs/nginx.*
 # RUN mv /var/www/html/index.nginx-debian.html /var/www/html/index.html
 RUN rm /var/www/html/index.nginx-debian.html
 
-EXPOSE 443
+EXPOSE 4430
 
 CMD ["nginx", "-g", "daemon off;"]
 
