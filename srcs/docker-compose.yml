@@ -39,6 +39,7 @@ services:
       SQL_DATABASE: ${SQL_DATABASE}
       SQL_USER: ${SQL_USER}
       SQL_PASSWORD: ${SQL_PASSWORD}
+      SQL_ROOT_PASSWORD: ${SQL_ROOT_PASSWORD}
       SQL_HOST: ${SQL_HOST}
     env_file:
       - .env
@@ -48,7 +49,7 @@ services:
       - /run/mysql:/run/mysql
     networks:
       - ohyeah
-
+    # entrypoint: ["/bin/sh", "/usr/local/bin/create_usr.sh"]
   nginx:
     image: nginx-test
     container_name: nginx
