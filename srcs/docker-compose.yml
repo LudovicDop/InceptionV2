@@ -45,11 +45,11 @@ services:
       - .env
     volumes:
       - mariadb_data:/var/lib/mysql
-      - ./requirements/mariadb/conf/init.sql:/docker-entrypoint-initdb.d/init.sql
+      # - ./requirements/mariadb/conf/init.sql:/docker-entrypoint-initdb.d/init.sql
       - /run/mysql:/run/mysql
     networks:
       - ohyeah
-    # entrypoint: ["/bin/sh", "/usr/local/bin/create_usr.sh"]
+    entrypoint: ["/bin/sh", "/usr/local/bin/create_user.sh"]
   nginx:
     image: nginx-test
     container_name: nginx

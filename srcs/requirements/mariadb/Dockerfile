@@ -10,11 +10,11 @@ RUN apt-get update && \
 EXPOSE 3306
 
 # Create MySQL directory for data persistence
-VOLUME /var/lib/mysql
+# VOLUME /var/lib/mysql
 
-COPY ./conf/init.sql /docker-entrypoint-initdb.d/
-# COPY ./conf/create_usr.sh ./usr/local/bin/create_usr.sh
-# RUN chmod +x ./usr/local/bin/create_usr.sh
+# COPY ./conf/init.sql /docker-entrypoint-initdb.d/
+COPY ./conf/create_user.sh ./usr/local/bin/create_user.sh
+RUN chmod +x ./usr/local/bin/create_user.sh
 
 COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 
@@ -22,4 +22,5 @@ COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 # COPY my.cnf /etc/mysql/my.cnf
 
 # Initialize database and start MariaDB
-CMD ["bash", "-c", "mysqld_safe --init-file=/docker-entrypoint-initdb.d/init.sql"]
+# CMD ["bash", "-c", "mysqld_safe --init-file=/docker-entrypoint-initdb.d/init.sql"]
+CMD ["bash", "-c", "mysqld_safe"]
