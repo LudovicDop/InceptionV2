@@ -2,8 +2,8 @@ services:
   wordpress:
     image: wordpress-test
     container_name: wordpress
-    ports:
-      - "9000:9000"  # Assuming the WordPress container listens on port 80
+    expose:
+      - "9000"  # Assuming the WordPress container listens on port 80
     depends_on:
       - mariadb
     environment:
@@ -33,8 +33,8 @@ services:
   mariadb:
     image: mariadb-test
     container_name: mariadb
-    ports:
-      - "3306:3306"
+    expose:
+      - "3306"
     environment:
       SQL_DATABASE: ${SQL_DATABASE}
       SQL_USER: ${SQL_USER}
