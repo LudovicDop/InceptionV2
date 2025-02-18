@@ -56,7 +56,7 @@ services:
     image: nginx-test
     container_name: nginx
     ports:
-      - "4430:4430"
+      - "443:443"
     restart: always
     depends_on:
       - wordpress
