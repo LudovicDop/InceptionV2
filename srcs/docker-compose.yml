@@ -1,6 +1,6 @@
 services:
   wordpress:
-    image: wordpress-test
+    image: wordpress
     container_name: wordpress
     expose:
       - "9000"  # Assuming the WordPress container listens on port 80
@@ -32,7 +32,7 @@ services:
     entrypoint: ["/bin/sh", "/usr/local/bin/wp-setup.sh"]
 
   mariadb:
-    image: mariadb-test
+    image: mariadb
     container_name: mariadb
     expose:
       - "3306"
@@ -47,13 +47,12 @@ services:
       - .env
     volumes:
       - mariadb_data:/var/lib/mysql
-      # - ./requirements/mariadb/conf/init.sql:/docker-entrypoint-initdb.d/init.sql
       - /run/mysql:/run/mysql
     networks:
       - ohyeah
     entrypoint: ["/bin/sh", "/usr/local/bin/create_user.sh"]
   nginx:
-    image: nginx-test
+    image: nginx
     container_name: nginx
     ports:
       - "443:443"
@@ -68,10 +67,21 @@ services:
 
 volumes:
   mariadb_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/ldoppler/data/mariadb
+      o: bind
   wordpress_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/ldoppler/data/wordpress
+      o: bind
+
 networks:
   ohyeah:
     driver: bridge
-    ipam:
-      config:
-        - subnet: 172.19.0.0/16
+    # ipam:
+    #   config:
+    #     - subnet: 172.19.0.0/16
